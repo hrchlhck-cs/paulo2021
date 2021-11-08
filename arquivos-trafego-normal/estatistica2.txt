@@ -1,0 +1,7 @@
+Arquivo;ferramenta;true_positive;false_positive;true_negative;false_negative
+modbuspal-normal.csv;iptables;nan;12.5;87.5;nan
+modbuspal-normal.csv;snort-lin;nan;0.0;100.0;nan
+modbuspal-normal.csv;snort-win;nan;11.27;88.73;nan
+scada-normal.csv;iptables;nan;12.49;87.51;nan
+scada-normal.csv;snort-lin;nan;0.0;100.0;nan
+scada-normal.csv;snort-win;nan;11.23;88.77;nan

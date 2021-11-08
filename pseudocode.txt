@@ -1,0 +1,93 @@
+normalização do dataset
+
+separar 14 ataques
+    7 ataques treino/teste
+    7 para validaçao
+    aleatorio
+
+mlpregressor
+    fn = honeypot
+    fp = coluna attack
+
+matriz de confusao por ataque (14 attk + normal)
+    Lista de neuronios:
+        n1 = snort windows
+        n2 = snort linux
+        n3 = iptables
+        n4 = normal
+    
+    output do mlp verificar apenas neuronio n4
+        se < 0 = 0
+        otherwise = 1
+        verificar se acertou
+
+    avaliacao inicial
+        calcular fp, fn, tp, tn
+        fp = trafego normal entrou no passo 1
+        fn = trafego ataque entrou no passo 2
+        tp = trafego ataque (1.)
+        tn = trafego normal e deixamos passar (2.)
+
+        1. se n4 = normal e consensoFerramentas(normal):		//0 ferramenta
+			enviar SCADA
+		2. se n4 = normal e ferramentas(ataque) == 1:			//1 ferramenta
+			ferramenta que achou ataque
+			se sistema == ataque:
+				enviar honeypot
+			enviar SCADA
+		3. se n4 = normal e ferramentas(ataque) >= 2:			//maioria ferramenta
+			enviar honeypot
+		4. se n4 = ataque e ferramentas(normal) == 1:
+			ferramenta que achou normal
+			se sistema == normal:
+				enviar honeypot
+			enviar bloquear
+		5. se n4 = ataque e ferramentas(normal) >= 2:
+			enviar honeypot
+		6. se n4 = ataque e ferramentas(ataque) >= 2:
+			enviar bloquear
+
+-- Ignorar a partir daqui
+        1. se n4 == normal
+            se n1 == n2 == n3 == normal
+                encaminhar para SCADA 
+                
+        2. se n4 == normal 
+            se n1 ou n2 ou n3 == ataque
+                se n1.sistema == ataque
+                    manda para honeypot
+                se n2.sistema == ataque
+                    manda para honeypot
+                se n3.sistema == ataque
+                    manda para honeypot
+
+        3. se n1 == normal
+            se n1 e n2 == ataque
+                honeypot
+            se n1 e n3 == ataque
+                honeypot
+            se n2 e n3 == ataque
+                honeypot
+        
+        4. se n4 == normal 
+            se n1 ou n2 ou n3 == ataque
+                se n1.sistema == normal
+                    encaminhar para SCADA
+                se n2.sistema == normal
+                    encaminhar para SCADA
+                se n3.sistema == normal
+                    encaminhar para SCADA
+
+        -- 3.1 se ferramenta disponivel
+        --     enviar
+        -- 3.2 senao
+        --     se 3 nao servirem manda pra honeypot
+            
+
+    avaliacao da ferramenta
+        apenas para o passo 1
+        fp =
+        fn =
+        tp =
+        tn =
+
