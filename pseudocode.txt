@@ -29,25 +29,25 @@ matriz de confusao por ataque (14 attk + normal)
         tn = trafego normal e deixamos passar (2.)
 
         1. se n4 = normal e consensoFerramentas(normal):		//0 ferramenta
-			enviar SCADA
-		2. se n4 = normal e ferramentas(ataque) == 1:			//1 ferramenta
-			ferramenta que achou ataque
-			se sistema == ataque:
-				enviar honeypot
-			enviar SCADA
-		3. se n4 = normal e ferramentas(ataque) >= 2:			//maioria ferramenta
+		enviar SCADA
+	2. se n4 = normal e ferramentas(ataque) == 1:			//1 ferramenta
+		ferramenta que achou ataque
+		se sistema == ataque:
 			enviar honeypot
-		4. se n4 = ataque e ferramentas(normal) == 1:
-			ferramenta que achou normal
-			se sistema == normal:
-				enviar honeypot
-			enviar bloquear
-		5. se n4 = ataque e ferramentas(normal) >= 2:
+		enviar SCADA
+	3. se n4 = normal e ferramentas(ataque) >= 2:			//maioria ferramenta
+		enviar honeypot
+	4. se n4 = ataque e ferramentas(normal) == 1:
+		ferramenta que achou normal
+		se sistema == normal:
 			enviar honeypot
-		6. se n4 = ataque e ferramentas(ataque) >= 2:
-			enviar bloquear
+		enviar bloquear
+	5. se n4 = ataque e ferramentas(normal) >= 2:
+		enviar honeypot
+	6. se n4 = ataque e ferramentas(ataque) >= 2:
+		enviar bloquear
 
--- Ignorar a partir daqui
+-- Versão antiga
         1. se n4 == normal
             se n1 == n2 == n3 == normal
                 encaminhar para SCADA 
